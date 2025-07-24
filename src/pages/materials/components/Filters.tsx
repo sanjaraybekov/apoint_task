@@ -1,4 +1,8 @@
-import { formatToUnixTime } from "../../../helpers/utils";
+import {
+  endOfMonth,
+  formatToUnixTime,
+  startOfMonth,
+} from "../../../helpers/utils";
 
 interface Props {
   onFilterChange: (key: string, value: string | number) => void;
@@ -10,6 +14,7 @@ export default function Filters({ onFilterChange }: Props) {
       <input
         name="start"
         type="date"
+        defaultValue={startOfMonth.split("T")[0]}
         className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         onChange={(e) => {
           onFilterChange("start", formatToUnixTime(e.target.value));
@@ -18,6 +23,7 @@ export default function Filters({ onFilterChange }: Props) {
       <input
         name="end"
         type="date"
+        defaultValue={endOfMonth.split("T")[0]}
         className="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         onChange={(e) => {
           onFilterChange("end", formatToUnixTime(e.target.value));

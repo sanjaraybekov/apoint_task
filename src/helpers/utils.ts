@@ -1,5 +1,6 @@
 import type { Material, GroupedMaterials } from "./interfaces";
 const date = new Date();
+const pad = (n: number) => String(n).padStart(2, "0");
 
 export const getToken = () => localStorage.getItem("token");
 
@@ -78,11 +79,19 @@ export const formatPrice = (price: number) => {
   return new Intl.NumberFormat("ru-RU").format(+price.toFixed(3));
 };
 
-/////start va end ni boshqa filterlarda shunday initial values bilan ishlasa kerak deb global qilib kettim
-export const startOfMonth = formatToUnixTime(
-  new Date(date.getFullYear(), date.getMonth(), 1).toISOString()
-);
+const getStartOfMonth = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  return `${year}-${pad(month)}-01`;
+};
 
-export const endOfMonth = formatToUnixTime(
-  new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString()
-);
+const getEndOfMonth = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const lastDay = new Date(year, month, 0).getDate();
+  return `${year}-${pad(month)}-${pad(lastDay)}`;
+};
+
+//boshqa filterlarda ham intial oy boshi va oxiri beriladigan qilingan bolishi mumkin deb globalga chiqarib kettim
+export const startOfMonth = getStartOfMonth(date);
+export const endOfMonth = getEndOfMonth(date);

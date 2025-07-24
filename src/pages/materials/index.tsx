@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { getMaterials } from "../../api/materials";
-import { groupMaterials, startOfMonth, endOfMonth } from "../../helpers/utils";
+import {
+  groupMaterials,
+  startOfMonth,
+  endOfMonth,
+  formatToUnixTime,
+} from "../../helpers/utils";
 import type { GroupedMaterials, QueryParams } from "../../helpers/interfaces";
 import Filters from "./components/Filters";
 import MaterialTableTotals from "./components/MaterialTableTotals";
 
 const initialQuery: QueryParams = {
-  start: startOfMonth,
-  end: endOfMonth,
+  start: formatToUnixTime(startOfMonth),
+  end: formatToUnixTime(endOfMonth),
 };
 
 export default function Materials() {
