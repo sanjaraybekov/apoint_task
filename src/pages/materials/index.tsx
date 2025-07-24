@@ -118,7 +118,6 @@ export default function Materials() {
                           ))}
                           <MaterialTableTotals totals={totals} />
                         </tr>
-                        {console.log(items)}
 
                         {collapsed.includes(`${name}-${cat}`) &&
                           items.map((item, idx) => (
